@@ -1,3 +1,5 @@
+import util.ComboBoxUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -16,8 +18,8 @@ public class TenSuuKeiSan {
     private JFrame fuChartJFrame = null;
     private JFrame quickCalcJFrame = null;
     private JPanel main;
-    private JComboBox<Integer> fu;
-    private JComboBox<Integer> fan;
+    private JComboBox<String> fu;
+    private JComboBox<String> fan;
     private JButton calculateBtn;
     private JSpinner bonba;
     private JTextField oyaron;
@@ -48,7 +50,7 @@ public class TenSuuKeiSan {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                final int fuAmount = Integer.parseInt((String) fu.getSelectedItem());
+                final int fuAmount = ComboBoxUtil.getSelected(fu, Integer.class);
                 int fanAmount;
 
                 String fanStr = (String) fan.getSelectedItem();
@@ -256,7 +258,7 @@ public class TenSuuKeiSan {
         init();
     }
 
-    public JComboBox<Integer> getFu() {
+    public JComboBox<String> getFu() {
         return fu;
     }
 

@@ -1,5 +1,6 @@
+import util.ComboBoxUtil;
+
 import javax.swing.*;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -41,14 +42,14 @@ public class FuChart {
     private JRadioButton nonMenzen;
     private JRadioButton tsumo;
     private JRadioButton ron;
-    private JComboBox<Integer> minKou28;
-    private JComboBox<Integer> anKou28;
-    private JComboBox<Integer> minKan28;
-    private JComboBox<Integer> anKan28;
-    private JComboBox<Integer> minKou19;
-    private JComboBox<Integer> anKou19;
-    private JComboBox<Integer> minKan19;
-    private JComboBox<Integer> anKan19;
+    private JComboBox<String> minKou28;
+    private JComboBox<String> anKou28;
+    private JComboBox<String> minKan28;
+    private JComboBox<String> anKan28;
+    private JComboBox<String> minKou19;
+    private JComboBox<String> anKou19;
+    private JComboBox<String> minKan19;
+    private JComboBox<String> anKan19;
     private JButton resetKouKan;
     private JCheckBox tanKiKatachi;
     private JCheckBox jyanTou;
@@ -56,14 +57,52 @@ public class FuChart {
     private JButton confirm;
     private JButton resetAll;
     private final TenSuuKeiSan tenSuuKeiSan;
-    private final List<JComboBox<Integer>> koukanArray = Arrays.asList(minKou28, minKou19, anKou28, anKou19, minKan28
+    private final List<JComboBox<String>> koukanArray = Arrays.asList(minKou28, minKou19, anKou28, anKou19, minKan28
             , minKan19, anKan28, anKan19);
 
     public FuChart(TenSuuKeiSan tenSuuKeiSan) {
         this.tenSuuKeiSan = tenSuuKeiSan;
         setLook();
-        init();
+        initFrame();
         initToDefault();
+        initListener();
+        renPuuJyanTou.setToolTipText("若不承认连风雀头规则，则不要勾选。当雀头同时是场风和自风时，获得 4 符，不承认时获得 2 符。");
+        confirm.setToolTipText("将更新符数");
+    }
+
+    private void setLook() {
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initFrame() {
+        jFrame = new JFrame("table");
+        tenSuuKeiSan.setFuChartJFrame(jFrame);
+
+        JPanel rootPane = main;
+        jFrame.setContentPane(rootPane);
+        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        jFrame.setResizable(false);
+        jFrame.pack();
+        jFrame.setTitle("符数计算");
+
+        JFrame tenSuuJFrame = tenSuuKeiSan.getjFrame();
+        jFrame.setLocation(tenSuuJFrame.getX() + tenSuuJFrame.getWidth() + 20, tenSuuJFrame.getY());
+        jFrame.setVisible(true);
+    }
+
+    private void initToDefault() {
+        other.setSelected(true);
+        menzen.setSelected(true);
+        tsumo.setSelected(true);
+        resetKouKan();
+        Arrays.asList(tanKiKatachi, jyanTou, renPuuJyanTou).forEach(jCheckBox -> jCheckBox.setSelected(false));
+    }
+
+    private void initListener() {
         jFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -78,12 +117,18 @@ public class FuChart {
                 setOtherDisabled();
             }
         });
+        koukanArray.forEach(jComboBox -> jComboBox.addItemListener(e -> {
+            final int kouKanNum = getKouKanNum();
+            if (kouKanNum == KOU_KAN_MAX_NUM) {
+                set0KouKanDisabled();
+            } else if (kouKanNum > KOU_KAN_MAX_NUM) {
+                JComboBox<?> target = (JComboBox<?>) e.getSource();
+                target.setSelectedItem(String.valueOf(ComboBoxUtil.getSelected(target, Integer.class) - (kouKanNum - 4)));
+            } else {
+                setAllKouKanStatus(true);
+            }
+        }));
         resetKouKan.addMouseListener(new MouseAdapter() {
-            /**
-             * {@inheritDoc}
-             *
-             * @param e
-             */
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -93,131 +138,24 @@ public class FuChart {
             }
         });
         jyanTou.addItemListener(e -> renPuuJyanTou.setEnabled(jyanTou.isSelected()));
-        renPuuJyanTou.setToolTipText("若不承认连风雀头规则，则不要勾选。当雀头同时是场风和自风时，获得 4 符，不承认时获得 2 符。");
-        ItemListener listener = e -> {
-            final int kouKanNum = getKouKanNum();
-            if (kouKanNum == KOU_KAN_MAX_NUM) {
-                set0KouKanDisabled();
-            } else if (kouKanNum > KOU_KAN_MAX_NUM) {
-                JComboBox<Integer> target = (JComboBox<Integer>) e.getSource();
-                target.setSelectedItem(Integer.parseInt(String.valueOf(target.getSelectedItem())) - (kouKanNum - 4) + "");
-            } else {
-                setAllKouKanStatus(true);
-            }
-        };
-        koukanArray.forEach(jComboBox -> jComboBox.addItemListener(listener));
         resetAll.addMouseListener(new MouseAdapter() {
-            /**
-             * {@inheritDoc}
-             *
-             * @param e
-             */
             @Override
             public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
                 if (other.isSelected()) {
-                    super.mouseClicked(e);
                     initToDefault();
                 }
             }
         });
         confirm.addMouseListener(new MouseAdapter() {
-            /**
-             * {@inheritDoc}
-             *
-             * @param e
-             */
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 tenSuuKeiSan.setFuChartWindowClosed(true);
-                tenSuuKeiSan.getFu().setSelectedItem(calculate() + "");
+                tenSuuKeiSan.getFu().setSelectedItem(String.valueOf(calculate()));
                 jFrame.dispose();
             }
         });
-        confirm.setToolTipText("将更新符数");
-    }
-
-    public JRadioButton getChiiToiTsu() {
-        return chiiToiTsu;
-    }
-
-    public JRadioButton getOther() {
-        return other;
-    }
-
-    public JRadioButton getMenzen() {
-        return menzen;
-    }
-
-    public JRadioButton getNonMenzen() {
-        return nonMenzen;
-    }
-
-    public JRadioButton getTsumo() {
-        return tsumo;
-    }
-
-    public JRadioButton getRon() {
-        return ron;
-    }
-
-    public JComboBox<Integer> getMinKou28() {
-        return minKou28;
-    }
-
-    public JComboBox<Integer> getAnKou28() {
-        return anKou28;
-    }
-
-    public JComboBox<Integer> getMinKan28() {
-        return minKan28;
-    }
-
-    public JComboBox<Integer> getAnKan28() {
-        return anKan28;
-    }
-
-    public JComboBox<Integer> getMinKou19() {
-        return minKou19;
-    }
-
-    public JComboBox<Integer> getAnKou19() {
-        return anKou19;
-    }
-
-    public JComboBox<Integer> getMinKan19() {
-        return minKan19;
-    }
-
-    public JComboBox<Integer> getAnKan19() {
-        return anKan19;
-    }
-
-    public JCheckBox getTanKiKatachi() {
-        return tanKiKatachi;
-    }
-
-    public JCheckBox getJyanTou() {
-        return jyanTou;
-    }
-
-    public JCheckBox getRenPuuJyanTou() {
-        return renPuuJyanTou;
-    }
-
-    public int getKouKanNum() {
-        return Integer.parseInt((String) minKou28.getSelectedItem())
-                + Integer.parseInt((String) anKou28.getSelectedItem())
-                + Integer.parseInt((String) minKan28.getSelectedItem())
-                + Integer.parseInt((String) anKan28.getSelectedItem())
-                + Integer.parseInt((String) minKou19.getSelectedItem())
-                + Integer.parseInt((String) anKou19.getSelectedItem())
-                + Integer.parseInt((String) minKan19.getSelectedItem())
-                + Integer.parseInt((String) anKan19.getSelectedItem());
-    }
-
-    public void set0KouKanDisabled() {
-        koukanArray.forEach(target -> target.setEnabled(!"0".equals(target.getSelectedItem())));
     }
 
     private void setOtherEnabled() {
@@ -238,14 +176,6 @@ public class FuChart {
         }
     }
 
-    private void resetKouKan() {
-        koukanArray.forEach(jComboBox -> jComboBox.setSelectedItem("0"));
-    }
-
-    private void setAllKouKanStatus(boolean enabled) {
-        koukanArray.forEach(jComboBox -> jComboBox.setEnabled(enabled));
-    }
-
     private void setOtherDisabled() {
         Arrays.asList(menzen, nonMenzen, tsumo, ron).forEach(jRadioButton -> jRadioButton.setEnabled(false));
         setAllKouKanStatus(false);
@@ -254,36 +184,27 @@ public class FuChart {
         resetAll.setEnabled(false);
     }
 
-    private void init() {
-        jFrame = new JFrame("table");
-        tenSuuKeiSan.setFuChartJFrame(jFrame);
-
-        JPanel rootPane = main;
-        jFrame.setContentPane(rootPane);
-        jFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        jFrame.setResizable(false);
-        jFrame.pack();
-        jFrame.setTitle("符数计算");
-
-        JFrame tenSuuJFrame = tenSuuKeiSan.getjFrame();
-        jFrame.setLocation(tenSuuJFrame.getX() + tenSuuJFrame.getWidth() + 20, tenSuuJFrame.getY());
-        jFrame.setVisible(true);
+    private int getKouKanNum() {
+        return ComboBoxUtil.getSelected(minKou28, Integer.class) +
+                ComboBoxUtil.getSelected(anKou28, Integer.class) +
+                ComboBoxUtil.getSelected(minKan28, Integer.class) +
+                ComboBoxUtil.getSelected(anKan28, Integer.class) +
+                ComboBoxUtil.getSelected(minKou19, Integer.class) +
+                ComboBoxUtil.getSelected(anKou19, Integer.class) +
+                ComboBoxUtil.getSelected(minKan19, Integer.class) +
+                ComboBoxUtil.getSelected(anKan19, Integer.class);
     }
 
-    private void setLook() {
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | UnsupportedLookAndFeelException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+    private void set0KouKanDisabled() {
+        koukanArray.forEach(target -> target.setEnabled(ComboBoxUtil.getSelected(target, Integer.class) != 0));
     }
 
-    private void initToDefault() {
-        other.setSelected(true);
-        menzen.setSelected(true);
-        tsumo.setSelected(true);
-        resetKouKan();
-        Arrays.asList(tanKiKatachi, jyanTou, renPuuJyanTou).forEach(jCheckBox -> jCheckBox.setSelected(false));
+    private void resetKouKan() {
+        koukanArray.forEach(jComboBox -> jComboBox.setSelectedItem("0"));
+    }
+
+    private void setAllKouKanStatus(boolean enabled) {
+        koukanArray.forEach(jComboBox -> jComboBox.setEnabled(enabled));
     }
 
     private int calculate() {
@@ -291,14 +212,14 @@ public class FuChart {
             return 25;
         }
         int fu = 20;
-        int kouKan = MINKOU_28 * Integer.parseInt((String) minKou28.getSelectedItem())
-                + ANKOU_28 * Integer.parseInt((String) anKou28.getSelectedItem())
-                + MINKAN_28 * Integer.parseInt((String) minKan28.getSelectedItem())
-                + ANKAN_28 * Integer.parseInt((String) anKan28.getSelectedItem())
-                + MINKOU_19 * Integer.parseInt((String) minKou19.getSelectedItem())
-                + ANKOU_19 * Integer.parseInt((String) anKou19.getSelectedItem())
-                + MINKAN_19 * Integer.parseInt((String) minKan19.getSelectedItem())
-                + ANKAN_19 * Integer.parseInt((String) anKan19.getSelectedItem());
+        int kouKan = MINKOU_28 * ComboBoxUtil.getSelected(minKou28, Integer.class)
+                + ANKOU_28 * ComboBoxUtil.getSelected(anKou28, Integer.class)
+                + MINKAN_28 * ComboBoxUtil.getSelected(minKan28, Integer.class)
+                + ANKAN_28 * ComboBoxUtil.getSelected(anKan28, Integer.class)
+                + MINKOU_19 * ComboBoxUtil.getSelected(minKou19, Integer.class)
+                + ANKOU_19 * ComboBoxUtil.getSelected(anKou19, Integer.class)
+                + MINKAN_19 * ComboBoxUtil.getSelected(minKan19, Integer.class)
+                + ANKAN_19 * ComboBoxUtil.getSelected(anKan19, Integer.class);
 
         /*
          * 平和、门前清自摸和两个役同时出现时，固定 20 符，不再添加自摸 +2 符。其余情况统一为 30 符。
