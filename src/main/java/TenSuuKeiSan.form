@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TenSuuKeiSan">
+  <grid id="27dc6" binding="main" layout-manager="GridLayoutManager" row-count="9" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="5" left="15" bottom="5" right="12"/>
+    <constraints>
+      <xy x="20" y="20" width="502" height="400"/>
+    </constraints>
+    <properties>
+      <minimumSize width="358" height="270"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="be0fa" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="12" height="31"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="符"/>
+        </properties>
+      </component>
+      <component id="58330" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="12" height="31"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="翻"/>
+        </properties>
+      </component>
+      <component id="e80bb" class="javax.swing.JButton" binding="calculateBtn">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="60"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="13"/>
+          <text value="计算"/>
+        </properties>
+      </component>
+      <component id="75a14" class="javax.swing.JComboBox" binding="fan">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="1"/>
+            <item value="2"/>
+            <item value="3"/>
+            <item value="4"/>
+            <item value="5"/>
+            <item value="6"/>
+            <item value="7"/>
+            <item value="8"/>
+            <item value="9"/>
+            <item value="10"/>
+            <item value="11"/>
+            <item value="12"/>
+            <item value="13"/>
+            <item value="两倍役满"/>
+            <item value="三倍役满"/>
+            <item value="四倍役满"/>
+            <item value="五倍役满"/>
+            <item value="六倍役满"/>
+          </model>
+        </properties>
+      </component>
+      <component id="46570" class="javax.swing.JTextField" binding="oyaron">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="120" height="35"/>
+          </grid>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <autoscrolls value="true"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <font name="Fira Code" size="18"/>
+          <horizontalAlignment value="0"/>
+          <opaque value="true"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="98434" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="280" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <foreground color="-2565928"/>
+          <opaque value="false"/>
+          <orientation value="0"/>
+        </properties>
+      </component>
+      <component id="65d98" class="javax.swing.JTextField" binding="koron">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="120" height="35"/>
+          </grid>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <autoscrolls value="true"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <font name="Fira Code" size="18"/>
+          <horizontalAlignment value="0"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="94041" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="親"/>
+        </properties>
+      </component>
+      <component id="cd9ed" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="子"/>
+        </properties>
+      </component>
+      <component id="3438e" class="javax.swing.JTextField" binding="oyatsumo">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="120" height="35"/>
+          </grid>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <autoscrolls value="true"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <font name="Fira Code" size="18"/>
+          <horizontalAlignment value="0"/>
+          <opaque value="true"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="e75c1" class="javax.swing.JTextField" binding="kotsumo">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="120" height="35"/>
+          </grid>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <autoscrolls value="true"/>
+          <editable value="false"/>
+          <enabled value="true"/>
+          <font name="Fira Code" size="18"/>
+          <horizontalAlignment value="0"/>
+          <text value="0"/>
+        </properties>
+      </component>
+      <component id="434b3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="YouYuan" size="18" style="0"/>
+          <text value="ロン"/>
+        </properties>
+      </component>
+      <component id="28e89" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="YouYuan" size="18" style="0"/>
+          <text value="ツモ"/>
+        </properties>
+      </component>
+      <component id="36352" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="本场"/>
+        </properties>
+      </component>
+      <component id="529d0" class="javax.swing.JButton" binding="clearBonba">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="10" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Microsoft YaHei" size="12" style="0"/>
+          <hideActionText value="false"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <text value="本场清零"/>
+        </properties>
+      </component>
+      <component id="5d257" class="javax.swing.JButton" binding="redoBonba">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="30" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Microsoft YaHei" size="12" style="0"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <text value="撤销"/>
+        </properties>
+      </component>
+      <component id="5bc60" class="javax.swing.JSpinner" binding="bonba">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="60" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <focusCycleRoot value="false"/>
+          <opaque value="false"/>
+        </properties>
+      </component>
+      <component id="902a7" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="翻符"/>
+        </properties>
+      </component>
+      <component id="7b632" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="本场数"/>
+        </properties>
+      </component>
+      <component id="fe15a" class="javax.swing.JComboBox" binding="fu">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="20"/>
+            <item value="25"/>
+            <item value="30"/>
+            <item value="40"/>
+            <item value="50"/>
+            <item value="60"/>
+            <item value="70"/>
+            <item value="80"/>
+            <item value="90"/>
+            <item value="100"/>
+            <item value="110"/>
+          </model>
+        </properties>
+      </component>
+      <component id="6d8aa" class="javax.swing.JLabel" binding="about">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="21" style="0"/>
+          <text value="⎚"/>
+        </properties>
+      </component>
+      <component id="70551" class="javax.swing.JLabel" binding="fuCalculate">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="符数计算"/>
+          <visible value="true"/>
+        </properties>
+      </component>
+      <component id="b9ee5" class="javax.swing.JButton" binding="quickCalcBtn">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="25"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font name="Microsoft YaHei" size="18"/>
+          <text value="快速计算 (beta)"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

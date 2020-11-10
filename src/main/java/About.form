@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="About">
+  <grid id="27dc6" binding="main" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
+    <constraints>
+      <xy x="20" y="20" width="400" height="185"/>
+    </constraints>
+    <properties>
+      <minimumSize width="300" height="185"/>
+      <preferredSize width="300" height="155"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="ea27e" class="javax.swing.JLabel" binding="versionStr">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="ver"/>
+        </properties>
+      </component>
+      <component id="ee272" class="javax.swing.JLabel" binding="ver">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="0.1.2"/>
+        </properties>
+      </component>
+      <component id="77d0c" class="javax.swing.JLabel" binding="talk">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="有什么意见建议都可以随时评论我私我，谢谢！"/>
+        </properties>
+      </component>
+      <component id="1faa0" class="javax.swing.JTextArea" binding="site">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="https://weibo.com/3042129461/GBU4x4BN6"/>
+        </properties>
+      </component>
+      <component id="1fd37" class="javax.swing.JButton" binding="copy">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="100" height="40"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="复制"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
